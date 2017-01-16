@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8" />
+<title>sample1</title>
+<style>
+body{
+
+</style>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>
+<script src="jquery.copyGuard.js"></script>
+<script type="text/javascript">
+
+$(function(){
+    $(document).copyGuard({});
+})
+
+</script>
+
+</head>
+<body>
+<h1>強制コピー不可</h1>
+    <div>
+        ここはコピー許可
+        <div style="border:1px solid;" class="copyGuard">
+            ここはコピー禁止
+            <div">
+                子要素でもコピー禁止
+            </div>
+        </div>
+    </div>
+</body>
+</html> 
