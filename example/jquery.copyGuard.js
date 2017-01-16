@@ -31,8 +31,8 @@
      * クリップボードを上書きする
      * @returns undefined
      */
-    var _overrideClipBoard = function () {
-        clipboardData.setData("Text", "");
+    var _overrideClipBoard = function (e) {
+        e.originalEvent.clipboardData.setData("Text", "");
     };
 
     $.fn.extend({
@@ -43,20 +43,21 @@
             //windowとdocumentにはイベントをセットできない
             //bodyにセットすると、全選択時にイベントをキャッチできない
             //→HTMLにセットすることで回避
-            $('html').on('copy', function () {
+            $('html').on('copy', function (e) {
                 var includeCopyGuard = _isIncludeCopyGuardBySelection();
                 if (includeCopyGuard && options.isCopyDeny()) {
-                    _overrideClipBoard();
+                    _overrideClipBoard(e);
                     return false;
                 }
             });
 
             //バブルアップ側処理
-            this.on('copy', options.guardSelector, function () {
+            this.on('copy', options.guardSelector, function (e) {
                 if (options.isCopyDeny()) {
-                    _overrideClipBoard();
+                    _overrideClipBoard(e);
+                    return false;
                 }
-                return false;
+                
             });
             
    
