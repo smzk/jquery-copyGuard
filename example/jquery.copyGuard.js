@@ -32,7 +32,11 @@
      * @returns undefined
      */
     var _overrideClipBoard = function (e) {
-        e.originalEvent.clipboardData.setData("Text", "");
+        if(e.originalEvent.clipboardData === undefined){
+            window.clipboardData.setData("Text", "");
+        }else{
+            e.originalEvent.clipboardData.setData("Text", "");
+        }
     };
 
     $.fn.extend({
